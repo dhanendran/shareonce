@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import axios from 'axios';
+import Header from './Header';
 
 class Home extends React.Component {
 	constructor(props) {
@@ -38,8 +37,8 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div className="App">
+				<Header />
 				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
 					<form onSubmit={this.handleSubmit}>
 						<label htmlFor="message">Enter your name: </label>
 						<textarea

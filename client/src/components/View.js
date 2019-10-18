@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import axios from 'axios';
+import Header from './Header';
 
 class View extends React.Component {
 	constructor(props) {
@@ -59,6 +59,7 @@ class View extends React.Component {
 	render() {
 		return (
 			<div className="App">
+				<Header />
 				<header className="App-header">
 				{ this.state.error ?
 					<div>

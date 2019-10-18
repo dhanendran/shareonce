@@ -1,26 +1,30 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route
+	BrowserRouter as Router,
+	Switch,
+	Route
 } from "react-router-dom";
 
-import './App.css';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Container from '@material-ui/core/Container';
 
-import Home from './Home';
-import View from './View';
+import Home from './components/Home';
+import View from './components/View';
 
 export default function App() {
 	return (
-    <Router>
-      <div>
-        <Switch>
-        	<Route path="/v/:urlHash" component={View} />
-          	<Route path="/" component={Home} />
-        </Switch>
-      </div>
-    </Router>
-  );
+		<React.Fragment>
+			<CssBaseline />
+			<Container>
+				<Router>
+					<div>
+						<Switch>
+							<Route path="/v/:urlHash" component={View} />
+							<Route path="/" component={Home} />
+						</Switch>
+					</div>
+				</Router>
+			</Container>
+		</React.Fragment>
+	);
 }
-
-

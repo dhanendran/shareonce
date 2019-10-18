@@ -1,0 +1,9 @@
+.root, .title {
+	flex-grow: 1;
+}
+.titleText, .aboutLink {
+	color: #FFF !important;
+}
+.titleText:hover {
+	text-decoration: none !important;
+}
