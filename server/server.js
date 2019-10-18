@@ -93,18 +93,4 @@ app.get('/api/view/:urlHash/:salt?', (req, res) => {
 	});
 });
 
-app.post('/api/world', (req, res) => {
-	console.log(req.body);
-	res.send(
-		`I received your POST request. This is what you sent me: ${req.body.message}`,
-	);
-});
-
-app.get('/api/greeting', (req, res) => {
-	const message = req.query.message || 'World';
-	res.setHeader('Content-Type', 'application/json');
-	res.send(JSON.stringify({ greeting: `Hello ${message}!` }));
-});
-
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
