@@ -1,3 +1,6 @@
+.MuiContainer-root.MuiContainer-maxWidthLg {
+	padding: 0;
+}
 .root, .title {
 	flex-grow: 1;
 }
@@ -6,4 +9,35 @@
 }
 .titleText:hover {
 	text-decoration: none !important;
+}
+.paperRoot {
+	height: 98vh; 
+}
+.paperBody {
+	padding: 15px 50px 0;
+}
+.MuiButton-containedPrimary.submitBtn, .MuiButton-containedSecondary.resetBtn {
+	margin-left: 10px;
+}
+.home-msg {
+	padding: 24px 16px;
+}
+.formData {
+	padding: 50px 10px;
+}
+.secretUrlContainer {
+	margin-top: 10px;
+	padding: 10px 5px;
+}
+.MuiFormControl-root.MuiTextField-root.secretUrl.MuiFormControl-marginNormal {
+	margin-top: 0;
+	width: 75%;
+	background-color: rgba(0, 0, 0, 0.09);
+}
+.secretUrlDiv {
+	margin-top: 10px; 
+}
+.secretMsg {
+	padding: 20px 10px 10px;
+	font-style: oblique;
 }

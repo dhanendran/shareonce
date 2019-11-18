@@ -17,7 +17,7 @@ export default function ButtonAppBar() {
 						</Link>
 					</Typography>
 					<Typography variant="subtitle2">
-						<Link href="#" className='aboutLink'>
+						<Link href="/about" className='aboutLink'>
 							About
 						</Link>
 					</Typography>

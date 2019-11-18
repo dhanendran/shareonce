@@ -1,6 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import Header from './Header';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 class View extends React.Component {
 	constructor(props) {
@@ -58,46 +62,60 @@ class View extends React.Component {
 
 	render() {
 		return (
-			<div className="App">
-				<Header />
-				<header className="App-header">
-				{ this.state.error ?
-					<div>
-						<p>Couldn't find your message. URL might be wrong or you might already viewed your message.</p>
-						<p>Click <a href="/">here</a> to create new.</p>
-					</div>
-					: ''
-				}
-				{ this.state.message ?
+			<div>
+				<Paper className='home-msg'>
+					{ this.state.error ?
+						<div>
+							<Typography component='p'>
+								Couldn't find your message. URL might be wrong or you might already viewed your message.
+							</Typography>
+							<Typography component='p'>Click <a href="/">here</a> to create new.</Typography>
+						</div>
+						: ''
+					}
+
+					{ this.state.message ?
 					(
 						<div>
-							<p>Your secret message</p>
-							<p>{this.state.message}</p>
+							<Typography component='p'>Your secret message:</Typography>
+							<Typography className='secretMsg' component='p'>{this.state.message}</Typography>
 						</div>
 					)
 					: ! this.state.error ?
 					(
 						<div>
-							<p>This message will be permanently removed from our storage. Please make sure you save the information before leaving this page.</p>
+							<Typography component='p'>This message will be permanently removed from our storage. Please make sure you save the information before leaving this page.</Typography>
 							<form onSubmit={this.handleSubmit}>
 								{ this.state.requireSalt ?
 									(
 										<div>
-											<label htmlFor="message">Enter your secret to view the message: </label>
-											<input
-												id="salt"
-												type="text"
+											<TextField
+												required
+												id='salt'
+												label='Secret'
+												style={{ margin: 8 }}
+												placeholder='Type here'
+												helperText='Enter your secret to view the message'
 												value={this.state.salt}
 												onChange={this.handleChange}
+												fullWidth
+												margin='normal'
+												InputLabelProps={{
+												  shrink: true,
+												}}
 											/>
 										</div>
 									) : '' }
-								<p><button type="submit">Are you sure want to see the message?</button></p>
+								<Typography component='p'>
+									<Button type='submit' variant='contained' color='primary' className='submitBtn' startIcon={<VisibilityIcon />}>
+										Are you sure want to see the message?
+									</Button>
+								</Typography>
 							</form>
 						</div>
 					) : ''
 				 }
-				</header>
+				</Paper>
 			</div>
 		);
 	}
