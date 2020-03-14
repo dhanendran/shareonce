@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import HttpsIcon from '@material-ui/icons/Https';
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 class Home extends React.Component {
@@ -15,10 +17,14 @@ class Home extends React.Component {
 		this.state = {
 			message: '',
 			salt: '',
-			url: ''
+			url: '',
+			errorMsg: false,
+			copied: false
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleError  = this.handleError.bind(this);
+		this.handleCopy   = this.handleCopy.bind(this);
 	}
 
 	handleChange(event) {
@@ -33,12 +39,20 @@ class Home extends React.Component {
 				salt: self.state.salt
 			})
 			.then(function (response) {
-				console.log(response.data);
 				self.setState({ url: window.location.origin + '/v/' + response.data.urlHash });
+				self.setState({ message: '', salt: '' });
 			})
 			.catch(function (error) {
-				console.log(error);
+				self.setState({ errorMsg: true });
 			});
+	}
+
+	handleError(event) {
+		this.setState({ errorMsg: ! this.state.errorMsg });
+	}
+
+	handleCopy(event) {
+		this.setState({ copied: ! this.state.copied });
 	}
 
 	render() {
@@ -89,6 +103,11 @@ class Home extends React.Component {
 								Encode
 							</Button>
 						</form>
+						<Snackbar open={this.state.errorMsg} autoHideDuration={4000} onClose={this.handleError}>
+							<Alert onClose={this.handleError} severity="error">
+								Something went wrong! Please try again.
+							</Alert>
+						</Snackbar>
 					</Paper>
 					{ this.state.url ?
 					<Paper className='secretUrlContainer'>
@@ -103,14 +122,20 @@ class Home extends React.Component {
 								margin="normal"
 								value={this.state.url}
 							/>
-							<CopyToClipboard text={this.state.url} >
+							<CopyToClipboard text={this.state.url} onCopy={this.handleCopy}>
 								<Button variant='contained' color='secondary' className='resetBtn' startIcon={<FileCopyIcon />}>
 									Copy
 								</Button>
 							</CopyToClipboard>
 						</div>
+
 					</Paper>
 					: '' }
+					<Snackbar open={this.state.copied} autoHideDuration={4000} onClose={this.handleCopy}>
+						<Alert onClose={this.handleCopy} severity="success">
+							URL copied into your clipboard.
+						</Alert>
+					</Snackbar>
 				</div>
 		);
 	}
